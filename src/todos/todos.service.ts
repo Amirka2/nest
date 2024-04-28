@@ -6,16 +6,16 @@ export class TodosService {
 
   getTodos = () => {
     return this.todos;
-  }
+  };
 
   createTodo = (todo: ICreateTodo) => {
     const id = this.todos.length;
 
     const newTodo: ITodo = {
       ...todo,
-      id
+      id,
     };
 
     this.todos.push(newTodo);
-  }
+  };
 }
