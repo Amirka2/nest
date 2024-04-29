@@ -1,21 +1,23 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
+import { TodoModel } from './dto/todos';
+import { Todo } from './interface/todos';
+import { CreateTodo } from './interface/todos';
 
 @Injectable()
 export class TodosService {
-  todos = [];
+  constructor(
+    @InjectModel(TodoModel)
+    private todoModel: typeof TodoModel,
+  ) {}
 
   getTodos = () => {
-    return this.todos;
+    return this.todoModel.findAll({
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+    });
   };
 
-  createTodo = (todo: ICreateTodo) => {
-    const id = this.todos.length;
-
-    const newTodo: ITodo = {
-      ...todo,
-      id,
-    };
-
-    this.todos.push(newTodo);
+  createTodo = (todo: CreateTodo): Promise<Todo> => {
+    return this.todoModel.create(todo);
   };
 }

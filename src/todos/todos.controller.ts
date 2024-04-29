@@ -1,11 +1,11 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Post } from '@nestjs/common';
 
-import { TodosService } from "./todos.service";
+import { TodosService } from './todos.service';
+import { CreateTodo } from './interface/todos';
 
 @Controller('/todos')
 export class TodosController {
-  constructor(private service: TodosService) {
-  }
+  constructor(private service: TodosService) {}
 
   @Get('/')
   getTodos() {
@@ -13,7 +13,7 @@ export class TodosController {
   }
 
   @Post('/')
-  createTodo(@Body() data: ICreateTodo) {
+  createTodo(@Body() data: CreateTodo) {
     return this.service.createTodo(data);
   }
 }
