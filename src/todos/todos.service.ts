@@ -21,38 +21,54 @@ export class TodosService {
     return this.todoModel.create(todo);
   };
 
-  editTodo = (todo: Todo) => {
-    return this.todoModel.update(todo, {
+  editTodo = async (todo: Todo) => {
+    const options = {
       where: {
         id: todo.id,
       },
-    });
+    };
+
+    await this.todoModel.update(todo, options);
+
+    return this.todoModel.findOne(options);
   };
 
   toggleTodo = async (id: number) => {
-    const todo = await this.todoModel.findOne({
+    const options = {
       where: {
         id,
       },
-    });
+    };
+
+    const todo = await this.todoModel.findOne(options);
 
     const newTodo = {
       ...todo,
       isChecked: !todo.isChecked,
     };
 
-    return this.todoModel.update(newTodo, {
-      where: {
-        id,
-      },
-    });
+    await this.todoModel.update(newTodo, options);
+
+    return this.todoModel.findOne(options);
   };
 
-  deleteTodo = (id: number) => {
-    return this.todoModel.destroy({
+  deleteTodo = async (id: number) => {
+    const options = {
       where: {
         id,
       },
-    });
+    };
+
+    const result = await this.todoModel.destroy(options);
+
+    if (result > 0) {
+      return {
+        success: true,
+      };
+    }
+
+    return {
+      success: false,
+    };
   };
 }
