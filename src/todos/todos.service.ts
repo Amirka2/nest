@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+
 import { TodoModel } from './dbModel/todos';
-import { Todo } from './model/todos';
-import { CreateTodo } from './model/todos';
+import { CreateTodo, Todo } from './model/todos';
 
 @Injectable()
 export class TodosService {

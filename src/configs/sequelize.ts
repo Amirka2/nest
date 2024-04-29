@@ -1,4 +1,4 @@
-import { TodoModel } from '../todos/dbModel/todos';
+import { TodoModel } from '../todos';
 import { SequelizeModuleOptions } from '@nestjs/sequelize';
 
 export const sequelizeConfig: SequelizeModuleOptions = {
