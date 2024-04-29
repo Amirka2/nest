@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { TodosModule } from './todos/todos.module';
-import { TodoModel } from './todos/dto/todos';
+import { TodoModel } from './todos/dbModel/todos';
 
 @Module({
   imports: [
