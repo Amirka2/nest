@@ -19,9 +19,13 @@ export class TodoModel extends Model<TodoModel> {
   @Column
   text: string;
 
+  @ApiProperty({ example: 'Жоское описанние' })
+  @Column
+  description?: string;
+
   @ApiProperty({ example: false })
   @Column({
-    field: 'ischecked',
+    field: 'is_checked',
   })
   isChecked: boolean;
 }
